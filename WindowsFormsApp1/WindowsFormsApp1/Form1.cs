@@ -5,7 +5,9 @@ using System.Data;
 using System.Drawing;
 using System.IO.Ports;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -54,6 +56,57 @@ namespace WindowsFormsApp1
                 this.serialPort1.Close();// 關閉 PORT
                 richTextBox1.Text = "離開連線成功";
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            byte[] modbus_data = new byte[100]; //宣告變數格式
+            modbus_data[0] = 0X0A; //sensor address
+            modbus_data[1] = 0x04; //Function  code
+            modbus_data[2] = 0x00; //starting address  H
+            modbus_data[3] = 0X04; //starting address  L  
+            modbus_data[4] = 0x00; //quantity  H
+            modbus_data[5] = 0x01; //quantity  L
+            modbus_data[6] = 0x71; //CRC H
+            modbus_data[7] = 0x70; //CRC L
+            //資料傳送
+            serialPort1.DiscardInBuffer();
+            byte[] buffer_databus = new byte[10];  //宣告變數格式
+            serialPort1.Write(modbus_data, 0, 8); //寫入資料
+            //資料回傳
+            Thread.Sleep(100); //Delay 0.1秒.
+            byte[] buffer = new byte[20]; //宣告變數格式
+            serialPort1.Read(buffer, 0, 7);       //Read COMPORT 
+            //資料解析
+            double value = 0;
+            value = Convert.ToDouble((buffer[3] * 256 + buffer[4]) * 0.0625);
+            value = System.Math.Round(value, 2);  //小數點
+            serialPort1.DiscardInBuffer();
+            label1.Text = Convert.ToString(value);
+
+
+            //    //Format
+            //Format_Q12_4  = 0.0625;
+            //Format_UQ8_8  = 0.00390625;
+            //Format_UQ16_0 = 1;
+
+            //modbus_data[6] = Convert.ToByte(crc_chk(modbus_data, 5) % 256);  //CRC H
+            //modbus_data[7] = Convert.ToByte(crc_chk(modbus_data, 5) / 256);  //CRC L
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
