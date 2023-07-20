@@ -24,7 +24,7 @@ namespace WindowsFormsApp1
             this.serialPort1.Close();                       //關閉COM連線
             if (serialPort1.IsOpen == false)
             {
-                this.serialPort1.PortName = textBox1.SelectedItem.ToString(); // 設定使用的 PORT
+                this.serialPort1.PortName = textBox1.Text; // 設定使用的 PORT
                 if (!serialPort1.IsOpen)                   // 檢查 PORT 是否關閉
                     this.serialPort1.Close();
                 this.serialPort1.BaudRate = 9600;            // baud rate = 9600
@@ -64,7 +64,7 @@ namespace WindowsFormsApp1
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.serialPort1.PortName = comboBox1.SelectedItem.ToString();
+            
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
