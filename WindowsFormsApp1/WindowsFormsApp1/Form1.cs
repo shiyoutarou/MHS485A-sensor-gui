@@ -136,12 +136,17 @@ namespace WindowsFormsApp1
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            //開啟timer
+            timer1.Enabled = true;
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-
+            //關閉timer
+            i = 0;
+            serialPort1.DiscardInBuffer();
+            timer1.Enabled = false;
+            chart1.Series[0].Points.Clear();
         }
     }
 }
