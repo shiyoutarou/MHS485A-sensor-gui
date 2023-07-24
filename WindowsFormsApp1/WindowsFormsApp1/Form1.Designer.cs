@@ -44,14 +44,18 @@
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button1.Location = new System.Drawing.Point(12, 174);
+            this.button1.Location = new System.Drawing.Point(12, 45);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(116, 44);
             this.button1.TabIndex = 0;
@@ -59,18 +63,22 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // serialPort1
+            // 
+            this.serialPort1.RtsEnable = true;
+            // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 377);
+            this.richTextBox1.Location = new System.Drawing.Point(270, 312);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(740, 112);
+            this.richTextBox1.Size = new System.Drawing.Size(245, 65);
             this.richTextBox1.TabIndex = 5;
             this.richTextBox1.Text = "";
             // 
             // button4
             // 
             this.button4.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button4.Location = new System.Drawing.Point(146, 224);
+            this.button4.Location = new System.Drawing.Point(16, 196);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(114, 45);
             this.button4.TabIndex = 3;
@@ -81,7 +89,7 @@
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button3.Location = new System.Drawing.Point(12, 224);
+            this.button3.Location = new System.Drawing.Point(14, 145);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(116, 45);
             this.button3.TabIndex = 2;
@@ -92,7 +100,7 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button2.Location = new System.Drawing.Point(146, 174);
+            this.button2.Location = new System.Drawing.Point(14, 95);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(114, 44);
             this.button2.TabIndex = 1;
@@ -103,16 +111,17 @@
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox1.Location = new System.Drawing.Point(12, 136);
+            this.textBox1.Location = new System.Drawing.Point(12, 12);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 27);
             this.textBox1.TabIndex = 6;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(152, 136);
+            this.label1.Location = new System.Drawing.Point(638, 332);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(74, 27);
             this.label1.TabIndex = 7;
@@ -120,7 +129,6 @@
             // 
             // timer1
             // 
-            this.timer1.Enabled = true;
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
@@ -130,7 +138,7 @@
             this.chart1.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(344, 12);
+            this.chart1.Location = new System.Drawing.Point(136, 14);
             this.chart1.Name = "chart1";
             this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.EarthTones;
             series1.ChartArea = "ChartArea1";
@@ -138,23 +146,39 @@
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(396, 279);
+            this.chart1.Size = new System.Drawing.Size(412, 277);
             this.chart1.TabIndex = 8;
             this.chart1.Text = "chart1";
             // 
             // richTextBox2
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(12, 297);
+            this.richTextBox2.Location = new System.Drawing.Point(16, 312);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(273, 60);
+            this.richTextBox2.Size = new System.Drawing.Size(248, 65);
             this.richTextBox2.TabIndex = 9;
             this.richTextBox2.Text = "";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = global::WindowsFormsApp1.Properties.Resources.Grey;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox1.Location = new System.Drawing.Point(643, 81);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(161, 147);
+            this.pictureBox1.TabIndex = 11;
+            this.pictureBox1.TabStop = false;
+            // 
+            // fileSystemWatcher1
+            // 
+            this.fileSystemWatcher1.EnableRaisingEvents = true;
+            this.fileSystemWatcher1.SynchronizingObject = this;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(775, 581);
+            this.ClientSize = new System.Drawing.Size(903, 581);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.richTextBox2);
             this.Controls.Add(this.chart1);
             this.Controls.Add(this.label1);
@@ -168,6 +192,8 @@
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -187,6 +213,8 @@
         private System.Windows.Forms.BindingSource bindingSource1;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.IO.FileSystemWatcher fileSystemWatcher1;
+        protected internal System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
