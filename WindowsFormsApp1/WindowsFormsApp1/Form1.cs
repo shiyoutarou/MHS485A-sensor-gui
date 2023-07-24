@@ -33,7 +33,7 @@ namespace WindowsFormsApp1
             ModbusClient modbusClient = new ModbusClient(str);
             if (serialPort1.IsOpen == false)
             {
-                this.serialPort1.PortName = textBox1.Text; // 設定使用的 PORT
+                this.serialPort1.PortName = str; // 設定使用的 PORT
                 if (!serialPort1.IsOpen)                   // 檢查 PORT 是否關閉
                     this.serialPort1.Close();
                 this.serialPort1.BaudRate = 9600;            // baud rate = 9600
