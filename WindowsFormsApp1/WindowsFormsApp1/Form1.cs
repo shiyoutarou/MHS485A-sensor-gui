@@ -22,6 +22,7 @@ namespace WindowsFormsApp1
         {
             //按下按鈕與感測器連線
             this.serialPort1.Close();                       //關閉COM連線
+            
             //自動偵測COM
             string[] comPorts = SerialPort.GetPortNames();
             for (int i = 0; i < comPorts.Length;i++)
@@ -29,7 +30,7 @@ namespace WindowsFormsApp1
                 richTextBox1.Text = comPorts[i];
             }
             string str = richTextBox1.Text;
-            Console.WriteLine(str);
+            
             if (serialPort1.IsOpen == false)
             {
                 this.serialPort1.PortName = str; // 設定使用的 PORT
