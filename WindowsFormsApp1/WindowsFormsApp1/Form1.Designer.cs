@@ -141,11 +141,6 @@
             this.chart1.Size = new System.Drawing.Size(396, 279);
             this.chart1.TabIndex = 8;
             this.chart1.Text = "chart1";
-            this.chart1.Click += new System.EventHandler(this.chart1_Click);
-            // 
-            // bindingSource1
-            // 
-            this.bindingSource1.CurrentChanged += new System.EventHandler(this.bindingSource1_CurrentChanged);
             // 
             // richTextBox2
             // 
@@ -159,7 +154,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1104, 581);
+            this.ClientSize = new System.Drawing.Size(775, 581);
             this.Controls.Add(this.richTextBox2);
             this.Controls.Add(this.chart1);
             this.Controls.Add(this.label1);

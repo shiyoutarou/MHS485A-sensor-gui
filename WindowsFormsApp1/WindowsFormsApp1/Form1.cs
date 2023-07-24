@@ -200,19 +200,56 @@ namespace WindowsFormsApp1
             return reg1;
         }
 
-        private void bindingSource1_CurrentChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void chart1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void timer1_Tick(object sender, EventArgs e)
         {
-            
+            //這是一個連結資料讀取的程式碼~~
+            byte[] modbus_data = new byte[100]; //宣告變數格式
+            modbus_data[0] = 0X0A; //sensor address
+            modbus_data[1] = 0x04; //Function  code
+            modbus_data[2] = 0x00; //starting address  H
+            modbus_data[3] = 0X04; //starting address  L  
+            modbus_data[4] = 0x00; //quantity  H
+            modbus_data[5] = 0x01; //quantity  L
+            modbus_data[6] = 0x71; //CRC H
+            modbus_data[7] = 0x70; //CRC L
+            //資料傳送
+            serialPort1.DiscardInBuffer();
+            byte[] buffer_databus = new byte[10];  //宣告變數格式
+            serialPort1.Write(modbus_data, 0, 8); //寫入資料
+            //資料回傳
+            Thread.Sleep(100); //Delay 0.1秒.
+            byte[] buffer = new byte[20]; //宣告變數格式
+            serialPort1.Read(buffer, 0, 7);       //Read COMPORT 
+            //資料解析
+            double value = 0;
+            value = Convert.ToDouble((buffer[3] * 256 + buffer[4]) * 0.0625);
+            value = System.Math.Round(value, 2);  //小數點
+            serialPort1.DiscardInBuffer();
+            label1.Text = Convert.ToString(value);
+
+            //  新增----------------------------------------------
+            chart1.Series[0].Points.AddXY(i++, value); //繪點指令
+
+            if (value >= 0 && value <= 100)
+            {
+                pictureBox1.BackgroundImage = Image.FromFile("picture//Green.png");
+            }
+            else if (value > 100 && value <= 200)
+            {
+                pictureBox1.BackgroundImage = Image.FromFile("picture//Yellow.png");
+            }
+            else
+            {
+                pictureBox1.BackgroundImage = Image.FromFile("picture//Red.png");
+            }
+
+            //    //Format
+            //Format_Q12_4  = 0.0625;
+            //Format_UQ8_8  = 0.00390625;
+            //Format_UQ16_0 = 1;
+
+            //modbus_data[6] = Convert.ToByte(crc_chk(modbus_data, 5) % 256);  //CRC H
+            //modbus_data[7] = Convert.ToByte(crc_chk(modbus_data, 5) / 256);  //CRC L
         }
     }
 }
