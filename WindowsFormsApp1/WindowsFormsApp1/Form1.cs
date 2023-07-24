@@ -30,7 +30,6 @@ namespace WindowsFormsApp1
             }
             string str = richTextBox1.Text;
             Console.WriteLine(str);
-            ModbusClient modbusClient = new ModbusClient(str);
             if (serialPort1.IsOpen == false)
             {
                 this.serialPort1.PortName = str; // 設定使用的 PORT
